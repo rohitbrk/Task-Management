@@ -21,8 +21,9 @@ const TaskCard = ({
             {title}
           </h5>
         </a>
-        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          {description}
+        <p className="justify-between mb-3 font-normal text-gray-700 dark:text-gray-400">
+          <span className="mr-2">{description}</span>
+          <span className="ml-2">{dueDate}</span>
         </p>
         <button
           onClick={() => {

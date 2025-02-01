@@ -1,56 +1,23 @@
 // @ts-nocheck
-import { useState } from "react";
 
-const Checkbox = ({ name, checked, toggleChecked }) => {
+const FilteredTasks = ({ filteredTasks, handleFilterTasks }) => {
   return (
-    <div className="flex items-center space-x-3 p-2 hover:bg-gray-100 rounded-lg">
-      <input
-        value={name}
-        type="checkbox"
-        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
-        checked={checked}
-        onChange={() => {
-          toggleChecked(name);
+    <div>
+      <label htmlFor="dropdown">Choose an option: </label>
+      <select
+        id="dropdown"
+        value={filteredTasks}
+        onChange={(e) => {
+          handleFilterTasks(e.target.value);
         }}
-      />
-      <label className="text-gray-700 font-medium">{name}</label>
+      >
+        <option value="">-- Select --</option>
+        <option value={"pending"}>pending</option>
+        <option value={"inprogress"}>inprogress</option>
+        <option value={"completed"}>completed</option>
+      </select>
     </div>
   );
 };
 
-const FilterTasks = ({ statuses, handleFilterTasks, toggleChecked }) => {
-  return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-gray-800">Manage Columns</h2>
-          <button
-            onClick={handleFilterTasks}
-            className="text-gray-500 hover:text-gray-800 focus:outline-none"
-          >
-            ✕
-          </button>
-        </div>
-        {statuses.map((status) => (
-          <div key={status.status} className="mb-2">
-            <Checkbox
-              name={status.status}
-              checked={status.checked}
-              toggleChecked={toggleChecked}
-            />
-          </div>
-        ))}
-        <div className="mt-4 flex justify-end">
-          <button
-            onClick={handleFilterTasks}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 focus:outline-none"
-          >
-            Close
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default FilterTasks;
+export default FilteredTasks;

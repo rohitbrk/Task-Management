@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { createContext, useReducer } from "react";
+import { sortByDate } from "../utils/sortByDate";
 
 const initialState = [
   {
@@ -24,68 +25,32 @@ const initialState = [
     dueDate: "25-02-2025",
   },
 ];
-const TasksContext = createContext(
-  initialState.sort((a, b) => {
-    const dateA = new Date(a.dueDate.split("-").reverse().join("-"));
-    const dateB = new Date(b.dueDate.split("-").reverse().join("-"));
-    console.log(dateA, dateB);
-    return dateA - dateB;
-  })
-);
+
+const TasksContext = createContext(initialState.sort(sortByDate));
 
 const tasksReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TASK":
-      return [...state, action.payload].sort((a, b) => {
-        const dateA = new Date(a.dueDate.split("-").reverse().join("-"));
-        const dateB = new Date(b.dueDate.split("-").reverse().join("-"));
-        console.log(dateA, dateB);
-        return dateA - dateB;
-      });
+      return [...state, action.payload].sort(sortByDate);
     case "UPDATE_TASK":
       return state
         .map((item) => {
           if (item.id === action.payload.id) return action.payload;
           return item;
         })
-        .sort((a, b) => {
-          const dateA = new Date(a.dueDate.split("-").reverse().join("-"));
-          const dateB = new Date(b.dueDate.split("-").reverse().join("-"));
-          console.log(dateA, dateB);
-          return dateA - dateB;
-        });
+        .sort(sortByDate);
     case "DELETE_TASK":
       return state
         .filter((item) => item.id !== action.payload.id)
-        .sort((a, b) => {
-          const dateA = new Date(a.dueDate.split("-").reverse().join("-"));
-          const dateB = new Date(b.dueDate.split("-").reverse().join("-"));
-          console.log(dateA, dateB);
-          return dateA - dateB;
-        });
-    case "FILTER_TASKS":
+        .sort(sortByDate);
+    case "FILTER_TASKS_":
       return state
         .map((item) => {
-          const arr = action.payload[0].filter((item) => item !== null);
-          for (let filter of arr) {
-            if (item.status === filter) return item;
-            else return null;
-          }
+          if (item.status === action.payload) return item;
+          else return null;
         })
         .filter((item) => item !== null)
-        .sort((a, b) => {
-          const dateA = new Date(a.dueDate.split("-").reverse().join("-"));
-          const dateB = new Date(b.dueDate.split("-").reverse().join("-"));
-          console.log(dateA, dateB);
-          return dateA - dateB;
-        });
-    case "SORT_TASKS_BY_DUE_DATE":
-      return state.sort((a, b) => {
-        const dateA = new Date(a.dueDate.split("-").reverse().join("-"));
-        const dateB = new Date(b.dueDate.split("-").reverse().join("-"));
-        console.log(dateA, dateB);
-        return dateA - dateB;
-      });
+        .sort(sortByDate);
     default:
       return state;
   }

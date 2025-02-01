@@ -8,6 +8,9 @@ import TasksSummary from "../components/TasksSummary";
 import { getTasksSummary } from "../utils/getTasksSummary";
 import { sortTasksByDueDate } from "../utils/sortTasksByDueDate";
 import FilterTasks from "../components/FilterTasks";
+import CompletedTasks from "./CompletedTasks";
+import { NavLink } from "react-router";
+import FilteredTasks from "../components/FilterTasks";
 
 const AllTasks = () => {
   const { state, dispatch } = useContext(TasksContext);
@@ -20,53 +23,29 @@ const AllTasks = () => {
   };
   const [showAddTaskModal, setShowAddTaskModal] = useState(false);
   const [showEditTaskModal, setShowEditTaskModal] = useState(false);
-  const [showFilterTasksModal, setShowFilterTasksModal] = useState(false);
-
+  const [toggleCompletedTasks, setToggleCompletedTasks] = useState(false);
   const [task, setTask] = useState(initialTaskState);
   const [editTask, setEditTask] = useState({});
-
-  const [statuses, setStatuses] = useState([
-    { status: "pending", checked: false },
-    { status: "inprogress", checked: false },
-    { status: "completed", checked: false },
-  ]);
-
-  const toggleChecked = (status) => {
-    let updatedStatuses = [...statuses];
-    updatedStatuses = updatedStatuses.map((item) => {
-      if (item.status === status) return { ...item, checked: !item.checked };
-      else return item;
-    });
-    setStatuses((prev) => updatedStatuses);
-  };
+  const [filteredTasks, setFilteredTasks] = useState(null);
+  const [tasks, setTasks] = useState(state);
 
   const handleAddTask = () => {
     dispatch({
       type: "ADD_TASK",
-      payload: {
-        id: task.id,
-        title: task.title,
-        description: task.description,
-        status: task.status,
-        dueDate: task.dueDate,
-      },
+      payload: task,
     });
     setTask((prev) => initialTaskState);
     setShowAddTaskModal((prev) => !prev);
+    setTasks((prev) => [...prev, task]);
   };
 
   const handleEditTask = () => {
     dispatch({
       type: "UPDATE_TASK",
-      payload: {
-        id: editTask.id,
-        title: editTask.title,
-        description: editTask.description,
-        status: editTask.status,
-        dueDate: editTask.dueDate,
-      },
+      payload: editTask,
     });
     setShowEditTaskModal((prev) => !prev);
+    setTasks((prev) => [...prev, editTask]);
   };
 
   const handleDelete = (id) => {
@@ -76,39 +55,34 @@ const AllTasks = () => {
     });
   };
 
-  const handleFilterTasks = () => {
-    if (statuses.length === 0) return;
-    dispatch({
-      type: "FILTER_TASKS",
-      payload: [
-        statuses.map((item) => {
-          if (item.checked === true) return item.status;
-          else return null;
-        }),
-      ],
-    });
-    setShowFilterTasksModal((prev) => !prev);
+  const handleFilterTasks = (status) => {
+    if (!status) return setTasks((prev) => state);
+    let updatedTasks = [...state];
+    updatedTasks = updatedTasks
+      .map((item) => {
+        if (item.status === status) return item;
+        else return null;
+      })
+      .filter((item) => item !== null);
+
+    setTasks((prev) => updatedTasks);
   };
 
   return (
     <div>
       <div>
-        <div>{<TasksSummary summary={getTasksSummary(state)} />}</div>
         <div>
-          <button
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 focus:outline-none"
-            onClick={() => setShowFilterTasksModal((prev) => !prev)}
-          >
-            Filter
+          {<TasksSummary summary={getTasksSummary(state)} />}
+          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 focus:outline-none">
+            <NavLink to="/completed-tasks" end>
+              View Completed Tasks
+            </NavLink>
           </button>
         </div>
-        {showFilterTasksModal && (
-          <FilterTasks
-            toggleChecked={toggleChecked}
-            statuses={statuses}
-            handleFilterTasks={handleFilterTasks}
-          />
-        )}
+        <FilteredTasks
+          filteredTasks={filteredTasks}
+          handleFilterTasks={handleFilterTasks}
+        />
       </div>
       <div>
         <div>
@@ -140,7 +114,7 @@ const AllTasks = () => {
           )}
         </div>
         <ul>
-          {state.map((item) => (
+          {tasks.map((item) => (
             <div key={item.id}>
               <TaskCard
                 setShowEditTaskModal={setShowEditTaskModal}
