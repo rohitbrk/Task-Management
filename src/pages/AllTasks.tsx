@@ -45,7 +45,12 @@ const AllTasks = () => {
       payload: editTask,
     });
     setShowEditTaskModal((prev) => !prev);
-    setTasks((prev) => [...prev, editTask]);
+    setTasks((prev) =>
+      prev.map((item) => {
+        if (item.id === editTask.id) return editTask;
+        else return item;
+      })
+    );
   };
 
   const handleDelete = (id) => {
