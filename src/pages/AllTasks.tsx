@@ -4,6 +4,10 @@ import { TasksContext } from "../context/TasksContext";
 import TaskCard from "../components/TaskCard";
 import AddTaskForm from "../components/AddTaskForm";
 import EditTaskForm from "../components/EditTaskForm";
+import TasksSummary from "../components/TasksSummary";
+import { getTasksSummary } from "../utils/getTasksSummary";
+import { sortTasksByDueDate } from "../utils/sortTasksByDueDate";
+import FilterTasks from "../components/FilterTasks";
 
 const AllTasks = () => {
   const { state, dispatch } = useContext(TasksContext);
@@ -16,9 +20,25 @@ const AllTasks = () => {
   };
   const [showAddTaskModal, setShowAddTaskModal] = useState(false);
   const [showEditTaskModal, setShowEditTaskModal] = useState(false);
+  const [showFilterTasksModal, setShowFilterTasksModal] = useState(false);
 
   const [task, setTask] = useState(initialTaskState);
   const [editTask, setEditTask] = useState({});
+
+  const [statuses, setStatuses] = useState([
+    { status: "pending", checked: false },
+    { status: "inprogress", checked: false },
+    { status: "completed", checked: false },
+  ]);
+
+  const toggleChecked = (status) => {
+    let updatedStatuses = [...statuses];
+    updatedStatuses = updatedStatuses.map((item) => {
+      if (item.status === status) return { ...item, checked: !item.checked };
+      else return item;
+    });
+    setStatuses((prev) => updatedStatuses);
+  };
 
   const handleAddTask = () => {
     dispatch({
@@ -56,16 +76,55 @@ const AllTasks = () => {
     });
   };
 
+  const handleFilterTasks = () => {
+    if (statuses.length === 0) return;
+    dispatch({
+      type: "FILTER_TASKS",
+      payload: [
+        statuses.map((item) => {
+          if (item.checked === true) return item.status;
+          else return null;
+        }),
+      ],
+    });
+    setShowFilterTasksModal((prev) => !prev);
+  };
+
   return (
     <div>
-      AllTasks
+      <div>
+        <div>{<TasksSummary summary={getTasksSummary(state)} />}</div>
+        <div>
+          <button
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 focus:outline-none"
+            onClick={() => setShowFilterTasksModal((prev) => !prev)}
+          >
+            Filter
+          </button>
+        </div>
+        {showFilterTasksModal && (
+          <FilterTasks
+            toggleChecked={toggleChecked}
+            statuses={statuses}
+            handleFilterTasks={handleFilterTasks}
+          />
+        )}
+      </div>
       <div>
         <div>
           <button
-            className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 focus:outline-none"
             onClick={() => setShowAddTaskModal((prev) => !prev)}
           >
             add
+          </button>
+        </div>
+        <div>
+          <button
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 focus:outline-none"
+            onClick={() => dispatch({ type: "SORT_TASKS_BY_DUE_DATE" })}
+          >
+            sort by due date
           </button>
         </div>
         <div>
