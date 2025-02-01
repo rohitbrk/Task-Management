@@ -120,14 +120,6 @@ const AllTasks = () => {
           </button>
         </div>
         <div>
-          <button
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 focus:outline-none"
-            onClick={() => dispatch({ type: "SORT_TASKS_BY_DUE_DATE" })}
-          >
-            sort by due date
-          </button>
-        </div>
-        <div>
           {showAddTaskModal && (
             <AddTaskForm
               task={task}

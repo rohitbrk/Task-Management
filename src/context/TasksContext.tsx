@@ -24,19 +24,45 @@ const initialState = [
     dueDate: "25-02-2025",
   },
 ];
-const TasksContext = createContext(initialState);
+const TasksContext = createContext(
+  initialState.sort((a, b) => {
+    const dateA = new Date(a.dueDate.split("-").reverse().join("-"));
+    const dateB = new Date(b.dueDate.split("-").reverse().join("-"));
+    console.log(dateA, dateB);
+    return dateA - dateB;
+  })
+);
 
 const tasksReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TASK":
-      return [...state, action.payload];
-    case "UPDATE_TASK":
-      return state.map((item) => {
-        if (item.id === action.payload.id) return action.payload;
-        return item;
+      return [...state, action.payload].sort((a, b) => {
+        const dateA = new Date(a.dueDate.split("-").reverse().join("-"));
+        const dateB = new Date(b.dueDate.split("-").reverse().join("-"));
+        console.log(dateA, dateB);
+        return dateA - dateB;
       });
+    case "UPDATE_TASK":
+      return state
+        .map((item) => {
+          if (item.id === action.payload.id) return action.payload;
+          return item;
+        })
+        .sort((a, b) => {
+          const dateA = new Date(a.dueDate.split("-").reverse().join("-"));
+          const dateB = new Date(b.dueDate.split("-").reverse().join("-"));
+          console.log(dateA, dateB);
+          return dateA - dateB;
+        });
     case "DELETE_TASK":
-      return state.filter((item) => item.id !== action.payload.id);
+      return state
+        .filter((item) => item.id !== action.payload.id)
+        .sort((a, b) => {
+          const dateA = new Date(a.dueDate.split("-").reverse().join("-"));
+          const dateB = new Date(b.dueDate.split("-").reverse().join("-"));
+          console.log(dateA, dateB);
+          return dateA - dateB;
+        });
     case "FILTER_TASKS":
       return state
         .map((item) => {
@@ -46,11 +72,18 @@ const tasksReducer = (state, action) => {
             else return null;
           }
         })
-        .filter((item) => item !== null);
+        .filter((item) => item !== null)
+        .sort((a, b) => {
+          const dateA = new Date(a.dueDate.split("-").reverse().join("-"));
+          const dateB = new Date(b.dueDate.split("-").reverse().join("-"));
+          console.log(dateA, dateB);
+          return dateA - dateB;
+        });
     case "SORT_TASKS_BY_DUE_DATE":
       return state.sort((a, b) => {
         const dateA = new Date(a.dueDate.split("-").reverse().join("-"));
         const dateB = new Date(b.dueDate.split("-").reverse().join("-"));
+        console.log(dateA, dateB);
         return dateA - dateB;
       });
     default:
