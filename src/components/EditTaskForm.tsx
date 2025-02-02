@@ -53,7 +53,7 @@ const EditTaskForm = ({
               />
             </label>
             <label>
-              {status}
+              status
               <select
                 value={editTask.status}
                 onChange={(e) =>

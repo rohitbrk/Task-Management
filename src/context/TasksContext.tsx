@@ -6,7 +6,7 @@ const initialState = [
   {
     id: 3,
     title: "item3",
-    description: "description4",
+    description: "description3",
     status: "pending",
     dueDate: "26-02-2025",
   },

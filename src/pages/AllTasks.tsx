@@ -26,7 +26,7 @@ const AllTasks = () => {
   const [toggleCompletedTasks, setToggleCompletedTasks] = useState(false);
   const [task, setTask] = useState(initialTaskState);
   const [editTask, setEditTask] = useState({});
-  const [filteredTasks, setFilteredTasks] = useState(null);
+  const [filteredTasks, setFilteredTasks] = useState("all");
   const [tasks, setTasks] = useState(state);
 
   const handleAddTask = () => {
@@ -58,10 +58,11 @@ const AllTasks = () => {
       type: "DELETE_TASK",
       payload: { id },
     });
+    setTasks((prev) => prev.filter((item) => item.id !== id));
   };
 
   const handleFilterTasks = (status) => {
-    if (!status) return setTasks((prev) => state);
+    if (status === "all") return setTasks((prev) => state);
     let updatedTasks = [...state];
     updatedTasks = updatedTasks
       .map((item) => {
@@ -86,6 +87,7 @@ const AllTasks = () => {
         </div>
         <FilteredTasks
           filteredTasks={filteredTasks}
+          setFilteredTasks={setFilteredTasks}
           handleFilterTasks={handleFilterTasks}
         />
       </div>
@@ -124,11 +126,7 @@ const AllTasks = () => {
               <TaskCard
                 setShowEditTaskModal={setShowEditTaskModal}
                 setEditTask={setEditTask}
-                id={item.id}
-                title={item.title}
-                description={item.description}
-                status={item.status}
-                dueDate={item.dueDate}
+                task={item}
                 handleDelete={handleDelete}
               />
             </div>
