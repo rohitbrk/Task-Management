@@ -1,15 +1,16 @@
 // @ts-nocheck
 import { useContext, useEffect, useState } from "react";
+import { NavLink } from "react-router";
 import { TasksContext } from "../context/TasksContext";
+
 import AddTaskForm from "../components/AddTaskForm";
 import EditTaskForm from "../components/EditTaskForm";
 import TasksSummary from "../components/TasksSummary";
+import FilterTasks from "../components/FilterTasks";
+import TasksList from "../components/TasksList";
+
 import { getTasksSummary } from "../utils/getTasksSummary";
 import { sortTasksByDueDate } from "../utils/sortTasksByDueDate";
-import FilterTasks from "../components/FilterTasks";
-import CompletedTasks from "./CompletedTasks";
-import { NavLink } from "react-router";
-import TasksList from "../components/TasksList";
 
 const AllTasks = () => {
   const { state, dispatch } = useContext(TasksContext);
@@ -57,7 +58,12 @@ const AllTasks = () => {
   };
 
   const handleFilterTasks = (status) => {
-    if (status === "all") return setTasks((prev) => state);
+    if (status === "all") {
+      setTasks((prev) => state);
+      setFilterBy((prev) => status);
+      return;
+    }
+    setFilterBy((prev) => status);
     setTasks((prev) => state.filter((item) => item.status === status));
   };
 
@@ -73,8 +79,8 @@ const AllTasks = () => {
           </button>
         </div>
         <FilterTasks
+          filters={["all", "pending", "inprogress", "completed"]}
           filterBy={filterBy}
-          setFilterBy={setFilterBy}
           handleFilterTasks={handleFilterTasks}
         />
       </div>

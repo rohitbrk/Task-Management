@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-const FilterTasks = ({ filterBy, setFilterBy, handleFilterTasks }) => {
+const FilterTasks = ({ filters, filterBy, handleFilterTasks }) => {
   return (
     <div>
       <label htmlFor="dropdown">Filter by status: </label>
@@ -9,13 +9,13 @@ const FilterTasks = ({ filterBy, setFilterBy, handleFilterTasks }) => {
         value={filterBy}
         onChange={(e) => {
           handleFilterTasks(e.target.value);
-          setFilterBy((prev) => e.target.value);
         }}
       >
-        <option value={"all"}>all</option>
-        <option value={"pending"}>pending</option>
-        <option value={"inprogress"}>inprogress</option>
-        <option value={"completed"}>completed</option>
+        {filters.map((filter) => (
+          <option key={filter} value={filter}>
+            {filter}
+          </option>
+        ))}
       </select>
     </div>
   );
