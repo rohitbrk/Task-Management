@@ -1,19 +1,15 @@
 // @ts-nocheck
 
-const FilteredTasks = ({
-  filteredTasks,
-  setFilteredTasks,
-  handleFilterTasks,
-}) => {
+const FilterTasks = ({ filterBy, setFilterBy, handleFilterTasks }) => {
   return (
     <div>
       <label htmlFor="dropdown">Filter by status: </label>
       <select
         id="dropdown"
-        value={filteredTasks}
+        value={filterBy}
         onChange={(e) => {
           handleFilterTasks(e.target.value);
-          setFilteredTasks((prev) => e.target.value);
+          setFilterBy((prev) => e.target.value);
         }}
       >
         <option value={"all"}>all</option>
@@ -25,4 +21,4 @@ const FilteredTasks = ({
   );
 };
 
-export default FilteredTasks;
+export default FilterTasks;

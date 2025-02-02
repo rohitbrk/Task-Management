@@ -9,7 +9,6 @@ import { sortTasksByDueDate } from "../utils/sortTasksByDueDate";
 import FilterTasks from "../components/FilterTasks";
 import CompletedTasks from "./CompletedTasks";
 import { NavLink } from "react-router";
-import FilteredTasks from "../components/FilterTasks";
 import TasksList from "../components/TasksList";
 
 const AllTasks = () => {
@@ -23,10 +22,9 @@ const AllTasks = () => {
   };
   const [showAddTaskModal, setShowAddTaskModal] = useState(false);
   const [showEditTaskModal, setShowEditTaskModal] = useState(false);
-  const [toggleCompletedTasks, setToggleCompletedTasks] = useState(false);
   const [task, setTask] = useState(initialTaskState);
   const [editTask, setEditTask] = useState({});
-  const [filteredTasks, setFilteredTasks] = useState("all");
+  const [filterBy, setFilterBy] = useState("all");
   const [tasks, setTasks] = useState(state);
 
   useEffect(() => {
@@ -47,6 +45,7 @@ const AllTasks = () => {
       type: "UPDATE_TASK",
       payload: editTask,
     });
+    setEditTask((prev) => ({}));
     setShowEditTaskModal((prev) => !prev);
   };
 
@@ -66,16 +65,16 @@ const AllTasks = () => {
     <div>
       <div>
         <div>
-          {<TasksSummary summary={getTasksSummary(state)} />}
+          <TasksSummary summary={getTasksSummary(state)} />
           <button className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 focus:outline-none">
             <NavLink to="/completed-tasks" end>
               View Completed Tasks
             </NavLink>
           </button>
         </div>
-        <FilteredTasks
-          filteredTasks={filteredTasks}
-          setFilteredTasks={setFilteredTasks}
+        <FilterTasks
+          filterBy={filterBy}
+          setFilterBy={setFilterBy}
           handleFilterTasks={handleFilterTasks}
         />
       </div>
