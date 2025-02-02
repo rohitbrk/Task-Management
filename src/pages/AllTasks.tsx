@@ -1,7 +1,6 @@
 // @ts-nocheck
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TasksContext } from "../context/TasksContext";
-import TaskCard from "../components/TaskCard";
 import AddTaskForm from "../components/AddTaskForm";
 import EditTaskForm from "../components/EditTaskForm";
 import TasksSummary from "../components/TasksSummary";
@@ -11,6 +10,7 @@ import FilterTasks from "../components/FilterTasks";
 import CompletedTasks from "./CompletedTasks";
 import { NavLink } from "react-router";
 import FilteredTasks from "../components/FilterTasks";
+import TasksList from "../components/TasksList";
 
 const AllTasks = () => {
   const { state, dispatch } = useContext(TasksContext);
@@ -29,6 +29,10 @@ const AllTasks = () => {
   const [filteredTasks, setFilteredTasks] = useState("all");
   const [tasks, setTasks] = useState(state);
 
+  useEffect(() => {
+    setTasks((prev) => state);
+  }, [state]);
+
   const handleAddTask = () => {
     dispatch({
       type: "ADD_TASK",
@@ -36,7 +40,6 @@ const AllTasks = () => {
     });
     setTask((prev) => initialTaskState);
     setShowAddTaskModal((prev) => !prev);
-    setTasks((prev) => [...prev, task]);
   };
 
   const handleEditTask = () => {
@@ -45,12 +48,6 @@ const AllTasks = () => {
       payload: editTask,
     });
     setShowEditTaskModal((prev) => !prev);
-    setTasks((prev) =>
-      prev.map((item) => {
-        if (item.id === editTask.id) return editTask;
-        else return item;
-      })
-    );
   };
 
   const handleDelete = (id) => {
@@ -58,20 +55,11 @@ const AllTasks = () => {
       type: "DELETE_TASK",
       payload: { id },
     });
-    setTasks((prev) => prev.filter((item) => item.id !== id));
   };
 
   const handleFilterTasks = (status) => {
     if (status === "all") return setTasks((prev) => state);
-    let updatedTasks = [...state];
-    updatedTasks = updatedTasks
-      .map((item) => {
-        if (item.status === status) return item;
-        else return null;
-      })
-      .filter((item) => item !== null);
-
-    setTasks((prev) => updatedTasks);
+    setTasks((prev) => state.filter((item) => item.status === status));
   };
 
   return (
@@ -120,18 +108,12 @@ const AllTasks = () => {
             />
           )}
         </div>
-        <ul>
-          {tasks.map((item) => (
-            <div key={item.id}>
-              <TaskCard
-                setShowEditTaskModal={setShowEditTaskModal}
-                setEditTask={setEditTask}
-                task={item}
-                handleDelete={handleDelete}
-              />
-            </div>
-          ))}
-        </ul>
+        <TasksList
+          tasks={tasks}
+          setShowEditTaskModal={setShowEditTaskModal}
+          setEditTask={setEditTask}
+          handleDelete={handleDelete}
+        />
       </div>
     </div>
   );
