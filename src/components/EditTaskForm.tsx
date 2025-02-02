@@ -52,6 +52,19 @@ const EditTaskForm = ({
                 }
               />
             </label>
+            <label>
+              {status}
+              <select
+                value={editTask.status}
+                onChange={(e) =>
+                  setEditTask((prev) => ({ ...prev, status: e.target.value }))
+                }
+              >
+                <option value={"pending"}>pending</option>
+                <option value={"inprogress"}>inprogress</option>
+                <option value={"completed"}>completed</option>
+              </select>
+            </label>
           </form>
         </div>
 

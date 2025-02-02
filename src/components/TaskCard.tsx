@@ -15,16 +15,15 @@ const TaskCard = ({
 }) => {
   return (
     <div>
-      <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+      <div className="max-w-sm p-6 bg-white border rounded-lg shadow-sm">
         <a href="#">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {title}
-          </h5>
+          <h5 className="mb-2 text-2xl font-bold tracking-tight">{title}</h5>
         </a>
-        <p className="justify-between mb-3 font-normal text-gray-700 dark:text-gray-400">
+        <p className="justify-between mb-3 font-normal">
           <span className="mr-2">{description}</span>
           <span className="ml-2">{dueDate}</span>
         </p>
+        <p>Status - {status}</p>
         <button
           onClick={() => {
             setEditTask((prev) => ({
