@@ -5,7 +5,7 @@ import { TasksContext } from "../context/TasksContext";
 import TasksList from "../components/TasksList";
 
 const CompletedTasks = () => {
-  const { state, dispatch } = useContext(TasksContext);
+  const { state } = useContext(TasksContext);
   const [completedTasks, setCompletedTasks] = useState([]);
   useEffect(() => {
     const completedTasks_ = state.filter((item) => item.status === "completed");

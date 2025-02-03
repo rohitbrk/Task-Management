@@ -10,14 +10,22 @@ const TaskCard = ({
   handleDelete,
 }) => {
   return (
-    <div>
-      <div className="max-w-sm p-6 bg-white border rounded-lg shadow-sm">
-        <h5 className="mb-2 text-2xl font-bold tracking-tight">{task.title}</h5>
+    <div className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+      <div>
+        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          {task.title}
+        </h5>
         <p className="justify-between mb-3 font-normal">
-          <span className="mr-2">{task.description}</span>
-          <span className="ml-2">{task.dueDate}</span>
+          <span className="font-normal text-gray-700 dark:text-gray-400">
+            {task.description}
+          </span>
+          <span className="font-normal text-gray-700 dark:text-gray-400">
+            {task.dueDate}
+          </span>
         </p>
-        <p>Status - {task.status}</p>
+        <p className="font-normal text-gray-700 dark:text-gray-400">
+          Status - {task.status}
+        </p>
         <button
           onClick={() => {
             setEditTask((prev) => ({
