@@ -2,13 +2,11 @@
 import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router";
 import { TasksContext } from "../context/TasksContext";
-
 import AddTaskForm from "../components/AddTaskForm";
 import EditTaskForm from "../components/EditTaskForm";
 import TasksSummary from "../components/TasksSummary";
 import FilterTasks from "../components/FilterTasks";
 import TasksList from "../components/TasksList";
-
 import { getTasksSummary } from "../utils/getTasksSummary";
 import { sortTasksByDueDate } from "../utils/sortTasksByDueDate";
 
@@ -70,14 +68,6 @@ const AllTasks = () => {
   return (
     <div>
       <div>
-        <div>
-          <TasksSummary summary={getTasksSummary(state)} />
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 focus:outline-none">
-            <NavLink to="/completed-tasks" end>
-              View Completed Tasks
-            </NavLink>
-          </button>
-        </div>
         <FilterTasks
           filters={["all", "pending", "inprogress", "completed"]}
           filterBy={filterBy}
