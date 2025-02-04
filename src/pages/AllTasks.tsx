@@ -8,6 +8,7 @@ import TasksSummary from "../components/TasksSummary";
 import FilterTasks from "../components/FilterTasks";
 import TasksList from "../components/TasksList";
 import { sortTasksByDueDate } from "../utils/sortTasksByDueDate";
+import Button from "../components/common/Button";
 
 const AllTasks = () => {
   const { state, dispatch } = useContext(TasksContext);
@@ -68,12 +69,9 @@ const AllTasks = () => {
     <div>
       <div>
         <div className="flex gap-2">
-          <button
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 focus:outline-none"
-            onClick={() => setShowAddTaskModal((prev) => !prev)}
-          >
-            add
-          </button>
+          <Button onClick={() => setShowAddTaskModal((prev) => !prev)}>
+            Add
+          </Button>
           <div>
             <FilterTasks
               filters={["all", "pending", "inprogress", "completed"]}

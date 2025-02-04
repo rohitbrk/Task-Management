@@ -5,7 +5,7 @@ const FilterTasks = ({ filters, filterBy, handleFilterTasks }) => {
     <div>
       <label htmlFor="dropdown">Filter</label>
       <select
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        className="border border-gray-300 cursor-pointer h-10 px-4 py-2 bg-gray-100 text-black items-center justify-center rounded-md text-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
         id="dropdown"
         value={filterBy}
         onChange={(e) => {
@@ -13,7 +13,7 @@ const FilterTasks = ({ filters, filterBy, handleFilterTasks }) => {
         }}
       >
         {filters.map((filter) => (
-          <option key={filter} value={filter}>
+          <option className="cursor-pointer" key={filter} value={filter}>
             {filter}
           </option>
         ))}

@@ -10,7 +10,7 @@ const TasksList = ({
   return (
     <ul>
       {tasks.map((item) => (
-        <div key={item.id}>
+        <div key={item.id} className="m-1 p-1">
           <TaskCard
             setShowEditTaskModal={setShowEditTaskModal}
             setEditTask={setEditTask}

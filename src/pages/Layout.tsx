@@ -11,6 +11,7 @@ const Layout = () => {
   const { state } = useContext(TasksContext);
   return (
     <div>
+      <h2>Task.io</h2>
       <TasksSummary summary={getTasksSummary(state)} />
       <TogglePage />
       <main>

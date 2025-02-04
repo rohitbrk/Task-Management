@@ -1,8 +1,26 @@
-// @ts-nocheck
-import { useContext } from "react";
-import { TasksContext } from "../context/TasksContext";
+import React from "react";
+import Input from "./common/Input";
+import Button from "./common/Button";
 
-const AddTaskForm = ({ task, setShowAddTaskModal, setTask, handleAddTask }) => {
+interface Task {
+  title: string;
+  description: string;
+  dueDate: string;
+}
+
+interface AddTaskFormProps {
+  task: Task;
+  setShowAddTaskModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setTask: React.Dispatch<React.SetStateAction<Task>>;
+  handleAddTask: () => void;
+}
+
+const AddTaskForm = ({
+  task,
+  setShowAddTaskModal,
+  setTask,
+  handleAddTask,
+}: AddTaskFormProps) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
@@ -10,58 +28,45 @@ const AddTaskForm = ({ task, setShowAddTaskModal, setTask, handleAddTask }) => {
           <h2 className="text-xl font-bold text-gray-800">Add Task</h2>
           <button
             onClick={() => setShowAddTaskModal((prev) => !prev)}
-            className="text-gray-500 hover:text-gray-800 focus:outline-none"
+            className="cursor-pointer text-gray-500 hover:text-gray-800 focus:outline-none"
           >
             ✕
           </button>
         </div>
         <div>
           <form>
-            <label>
-              title
-              <input
-                value={task.title}
-                onChange={(e) =>
-                  setTask((prev) => ({ ...prev, title: e.target.value }))
-                }
-              />
-            </label>
+            <Input
+              value={task.title}
+              placeholder="Enter title"
+              onChange={(e) =>
+                setTask((prev) => ({ ...prev, title: e.target.value }))
+              }
+            />
             <br />
-            <label>
-              description
-              <input
-                value={task.description}
-                onChange={(e) =>
-                  setTask((prev) => ({ ...prev, description: e.target.value }))
-                }
-              />
-            </label>
+
+            <Input
+              value={task.description}
+              placeholder="Enter description"
+              onChange={(e) =>
+                setTask((prev) => ({ ...prev, description: e.target.value }))
+              }
+            />
             <br />
-            <label>
-              dueDate
-              <input
-                value={task.dueDate}
-                onChange={(e) =>
-                  setTask((prev) => ({ ...prev, dueDate: e.target.value }))
-                }
-              />
-            </label>
+            <Input
+              value={task.dueDate}
+              placeholder="Enter due date"
+              onChange={(e) =>
+                setTask((prev) => ({ ...prev, dueDate: e.target.value }))
+              }
+            />
           </form>
         </div>
 
         <div className="mt-4 flex justify-end">
-          <button
-            onClick={() => setShowAddTaskModal((prev) => !prev)}
-            className="px-4 py-2 bg-gray-600 text-white rounded-lg shadow hover:bg-gray-700 focus:outline-none"
-          >
+          <Button onClick={() => setShowAddTaskModal((prev) => !prev)}>
             close
-          </button>
-          <button
-            onClick={handleAddTask}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 focus:outline-none"
-          >
-            submit
-          </button>
+          </Button>
+          <Button onClick={handleAddTask}>submit</Button>
         </div>
       </div>
     </div>
