@@ -16,7 +16,7 @@ const TaskCard = ({
   handleDelete,
 }: TaskCardProps) => {
   return (
-    <div className="block max-w-sm px-2 py-4 bg-white shadow-md rounded-xl w-full border border-transparent hover:border-gray-200">
+    <div className="block min-w-sm sm:min-w-md px-2 py-4 bg-white shadow-md rounded-xl w-full border border-transparent hover:border-gray-200">
       <div>
         <div className="flex justify-between">
           <h5 className="text-2xl font-bold tracking-tight text-gray-900">

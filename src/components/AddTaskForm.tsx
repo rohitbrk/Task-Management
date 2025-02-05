@@ -58,10 +58,15 @@ const AddTaskForm = ({
         </div>
 
         <div className="mt-4 flex justify-end">
-          <Button onClick={() => setShowAddTaskModal((prev) => !prev)}>
+          <Button
+            onClick={() => setShowAddTaskModal((prev) => !prev)}
+            variant="primary"
+          >
             close
           </Button>
-          <Button onClick={handleAddTask}>submit</Button>
+          <Button onClick={handleAddTask} variant="primary">
+            submit
+          </Button>
         </div>
       </div>
     </div>

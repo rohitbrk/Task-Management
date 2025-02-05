@@ -65,8 +65,11 @@ const AllTasks = () => {
   return (
     <div>
       <div>
-        <div className="flex gap-2">
-          <Button onClick={() => setShowAddTaskModal((prev) => !prev)}>
+        <div className="flex justify-around items-center gap-2">
+          <Button
+            onClick={() => setShowAddTaskModal((prev) => !prev)}
+            variant="primary"
+          >
             Add
           </Button>
           <div>
@@ -97,12 +100,15 @@ const AllTasks = () => {
             />
           )}
         </div>
-        <TasksList
-          tasks={tasks}
-          setShowEditTaskModal={setShowEditTaskModal}
-          setEditTask={setEditTask}
-          handleDelete={handleDelete}
-        />
+        <div>
+          <div className="flex justify-around">All Tasks</div>
+          <TasksList
+            tasks={tasks}
+            setShowEditTaskModal={setShowEditTaskModal}
+            setEditTask={setEditTask}
+            handleDelete={handleDelete}
+          />
+        </div>
       </div>
     </div>
   );

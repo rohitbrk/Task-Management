@@ -13,7 +13,7 @@ const CompletedTasks = () => {
 
   return (
     <div>
-      CompletedTasks
+      <div className="flex justify-around">Completed Tasks</div>
       <TasksList
         tasks={completedTasks}
         setShowEditTaskModal={() => {}}
