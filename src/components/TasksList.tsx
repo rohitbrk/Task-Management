@@ -16,6 +16,7 @@ const TasksList = ({
 }: TasksListProps) => {
   return (
     <div className="flex flex-col items-center gap-2">
+      <div className="flex justify-around text-2xl">All Tasks</div>
       <ul>
         {tasks.length === 0 ? (
           <div>No Tasks</div>
