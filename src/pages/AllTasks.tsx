@@ -7,7 +7,7 @@ import FilterTasks from "../components/FilterTasks";
 import TasksList from "../components/TasksList";
 import Button from "../components/common/Button";
 import { Task } from "../types";
-import RightPointingArrow from "../svg/RightPointingArrow";
+import RightPointingArrowSvg from "../svg/RightPointingArrowSvg";
 
 const AllTasks = () => {
   const { state, dispatch } = useContext(TasksContext);
@@ -72,7 +72,7 @@ const AllTasks = () => {
             onClick={() => setShowAddTaskModal((prev) => !prev)}
             variant="primary"
           >
-            Add <RightPointingArrow />
+            Add <RightPointingArrowSvg />
           </Button>
           <div>
             <FilterTasks

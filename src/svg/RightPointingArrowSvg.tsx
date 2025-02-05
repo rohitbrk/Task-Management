@@ -1,4 +1,4 @@
-const RightPointingArrow = () => {
+const RightPointingArrowSvg = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -17,4 +17,4 @@ const RightPointingArrow = () => {
   );
 };
 
-export default RightPointingArrow;
+export default RightPointingArrowSvg;

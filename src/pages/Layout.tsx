@@ -12,7 +12,7 @@ const Layout = () => {
   return (
     <div className="flex flex-col">
       <Nav />
-      <div className="flex justify-around items-center">
+      <div className="flex justify-between items-center">
         <TasksSummary summary={getTasksSummary(state)} />
         <TogglePage />
       </div>
