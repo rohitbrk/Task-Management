@@ -10,7 +10,7 @@ const TasksSummary = ({ summary }: TasksSummaryProps) => {
         {summaryArr.map((item) => (
           <span
             key={item.split(",")[0]}
-            className="p-2 border border-gray-300 rounder-lg bg-gray-100 rounded-md"
+            className="p-2 border border-gray-100 rounder-lg bg-gray-50 rounded-md"
           >{`${item.split(",")[0]}-${item.split(",")[1]}`}</span>
         ))}
       </div>

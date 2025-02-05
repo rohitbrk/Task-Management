@@ -10,7 +10,7 @@ const Input = ({ value, placeholder, onChange }: InputProps) => {
       value={value}
       placeholder={placeholder}
       onChange={onChange}
-      className="border p-2 m-1 w-full rounded-lg shadow-lg hover:shadow-xl"
+      className="border-gray-300 p-2 m-1 w-full rounded-lg shadow-lg hover:shadow-xl"
     ></input>
   );
 };

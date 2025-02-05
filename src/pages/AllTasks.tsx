@@ -7,6 +7,7 @@ import FilterTasks from "../components/FilterTasks";
 import TasksList from "../components/TasksList";
 import Button from "../components/common/Button";
 import { Task } from "../types";
+import RightPointingArrow from "../svg/RightPointingArrow";
 
 const AllTasks = () => {
   const { state, dispatch } = useContext(TasksContext);
@@ -71,7 +72,7 @@ const AllTasks = () => {
             onClick={() => setShowAddTaskModal((prev) => !prev)}
             variant="primary"
           >
-            Add
+            Add <RightPointingArrow />
           </Button>
           <div>
             <FilterTasks
@@ -102,7 +103,7 @@ const AllTasks = () => {
           )}
         </div>
         <div>
-          <div className="flex justify-around">All Tasks</div>
+          <div className="flex justify-around text-2xl">All Tasks</div>
           <TasksList
             tasks={tasks}
             setShowEditTaskModal={setShowEditTaskModal}
