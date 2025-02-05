@@ -1,8 +1,23 @@
-// @ts-nocheck
-import { createContext, useReducer } from "react";
+import { createContext, ReactNode, useReducer } from "react";
 import { sortByDate } from "../utils/sortByDate";
+import { Task } from "../types";
 
-const initialState = [
+type TaskAction =
+  | { type: "ADD_TASK"; payload: Task }
+  | { type: "UPDATE_TASK"; payload: Task }
+  | { type: "DELETE_TASK"; payload: { id: number } }
+  | { type: "FILTER_TASKS_"; payload: "pending" | "completed" };
+
+interface TasksContextType {
+  state: Task[];
+  dispatch: React.Dispatch<TaskAction>;
+}
+
+interface TasksProviderProps {
+  children: ReactNode;
+}
+
+const initialState: Task[] = [
   {
     id: 3,
     title: "item3",
@@ -26,9 +41,12 @@ const initialState = [
   },
 ];
 
-const TasksContext = createContext(initialState.sort(sortByDate));
+const TasksContext = createContext<TasksContextType>({
+  state: initialState.sort(sortByDate),
+  dispatch: () => {},
+});
 
-const tasksReducer = (state, action) => {
+const tasksReducer = (state: Task[], action: TaskAction) => {
   switch (action.type) {
     case "ADD_TASK":
       return [...state, action.payload].sort(sortByDate);
@@ -56,7 +74,7 @@ const tasksReducer = (state, action) => {
   }
 };
 
-const TasksProvider = ({ children }) => {
+const TasksProvider: React.FC<TasksProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(tasksReducer, initialState);
   return (
     <TasksContext.Provider value={{ state, dispatch }}>

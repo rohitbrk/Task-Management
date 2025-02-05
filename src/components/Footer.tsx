@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 const Footer = () => {
   return (
     <footer className="bg-white rounded-lg shadow-sm m-4">

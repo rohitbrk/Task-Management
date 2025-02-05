@@ -1,18 +1,11 @@
-// @ts-nocheck
 import React from "react";
 import Button from "./common/Button";
 import Input from "./common/Input";
-
-interface Task {
-  title: string;
-  description: string;
-  dueDate: string;
-  status: "pending" | "inprogress" | "completed";
-}
+import { Task } from "../types";
 
 interface EditTaskFormProps {
   editTask: Task;
-  setEditTask: ({}) => void;
+  setEditTask: (task: any) => Task;
   handleEditTask: () => void;
   setShowEditTaskModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -41,14 +34,14 @@ const EditTaskForm = ({
               value={editTask.title}
               placeholder="title"
               onChange={(e) =>
-                setEditTask((prev) => ({ ...prev, title: e.target.value }))
+                setEditTask((prev: any) => ({ ...prev, title: e.target.value }))
               }
             />
             <br />
             <Input
               value={editTask.description}
               onChange={(e) =>
-                setEditTask((prev) => ({
+                setEditTask((prev: any) => ({
                   ...prev,
                   description: e.target.value,
                 }))
@@ -58,7 +51,10 @@ const EditTaskForm = ({
             <Input
               value={editTask.dueDate}
               onChange={(e) =>
-                setEditTask((prev) => ({ ...prev, dueDate: e.target.value }))
+                setEditTask((prev: any) => ({
+                  ...prev,
+                  dueDate: e.target.value,
+                }))
               }
             />
             <div className="flex justify-end">
@@ -68,7 +64,10 @@ const EditTaskForm = ({
                   className="border border-gray-300 cursor-pointer h-10 px-4 py-2 bg-gray-100 text-black items-center justify-center rounded-md text-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
                   value={editTask.status}
                   onChange={(e) =>
-                    setEditTask((prev) => ({ ...prev, status: e.target.value }))
+                    setEditTask((prev: any) => ({
+                      ...prev,
+                      status: e.target.value,
+                    }))
                   }
                 >
                   <option value={"pending"}>pending</option>

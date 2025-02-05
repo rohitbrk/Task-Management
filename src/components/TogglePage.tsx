@@ -6,15 +6,12 @@ import Button from "./common/Button";
 const TogglePage = () => {
   const [isChecked, setIsChecked] = useState(false);
   const { pathname } = useLocation();
-  const [pathname_, setPathname] = useState("/");
 
   const handleChangePage = () => {
     if (pathname === "/") {
       setIsChecked(!isChecked);
-      setPathname("/completed-tasks");
       return;
     }
-    setPathname("/");
     setIsChecked(!isChecked);
   };
 

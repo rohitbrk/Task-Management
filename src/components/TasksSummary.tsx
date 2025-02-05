@@ -1,5 +1,7 @@
-// @ts-nocheck
-const TasksSummary = ({ summary }) => {
+interface TasksSummaryProps {
+  summary: { [key: string]: number };
+}
+const TasksSummary = ({ summary }: TasksSummaryProps) => {
   const summaryArr = [];
   for (let item in summary) summaryArr.push(`${item}, ${summary[item]}`);
   return (

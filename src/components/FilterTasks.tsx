@@ -1,6 +1,13 @@
-// @ts-nocheck
-
-const FilterTasks = ({ filters, filterBy, handleFilterTasks }) => {
+interface FilterTasksProps {
+  filters: string[];
+  filterBy: string;
+  handleFilterTasks: (filter: string) => void;
+}
+const FilterTasks = ({
+  filters,
+  filterBy,
+  handleFilterTasks,
+}: FilterTasksProps) => {
   return (
     <div>
       <label htmlFor="dropdown">Filter</label>

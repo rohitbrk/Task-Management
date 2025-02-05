@@ -1,13 +1,10 @@
 // @ts-nocheck
 import { useContext, useEffect, useState } from "react";
-import { NavLink } from "react-router";
 import { TasksContext } from "../context/TasksContext";
 import AddTaskForm from "../components/AddTaskForm";
 import EditTaskForm from "../components/EditTaskForm";
-import TasksSummary from "../components/TasksSummary";
 import FilterTasks from "../components/FilterTasks";
 import TasksList from "../components/TasksList";
-import { sortTasksByDueDate } from "../utils/sortTasksByDueDate";
 import Button from "../components/common/Button";
 
 const AllTasks = () => {
@@ -48,14 +45,14 @@ const AllTasks = () => {
     setShowEditTaskModal((prev) => !prev);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id: number) => {
     dispatch({
       type: "DELETE_TASK",
       payload: { id },
     });
   };
 
-  const handleFilterTasks = (status) => {
+  const handleFilterTasks = (status: string) => {
     if (status === "all") {
       setTasks((prev) => state);
       setFilterBy((prev) => status);

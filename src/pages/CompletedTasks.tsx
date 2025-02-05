@@ -1,12 +1,11 @@
-// @ts-nocheck
 import { useContext, useEffect, useState } from "react";
-import { NavLink } from "react-router";
 import { TasksContext } from "../context/TasksContext";
 import TasksList from "../components/TasksList";
+import { Task } from "../types";
 
 const CompletedTasks = () => {
   const { state } = useContext(TasksContext);
-  const [completedTasks, setCompletedTasks] = useState([]);
+  const [completedTasks, setCompletedTasks] = useState<Task[]>([]);
   useEffect(() => {
     const completedTasks_ = state.filter((item) => item.status === "completed");
     setCompletedTasks((prev) => completedTasks_);

@@ -1,8 +1,7 @@
-// @ts-nocheck
-import { NavLink, Outlet, useLocation } from "react-router";
+import { Outlet } from "react-router";
 import TasksSummary from "../components/TasksSummary";
 import { getTasksSummary } from "../utils/getTasksSummary";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { TasksContext } from "../context/TasksContext";
 import Footer from "../components/Footer";
 import TogglePage from "../components/TogglePage";

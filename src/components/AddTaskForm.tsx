@@ -1,12 +1,7 @@
 import React from "react";
 import Input from "./common/Input";
 import Button from "./common/Button";
-
-interface Task {
-  title: string;
-  description: string;
-  dueDate: string;
-}
+import { Task } from "../types";
 
 interface AddTaskFormProps {
   task: Task;

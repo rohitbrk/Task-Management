@@ -1,7 +1,8 @@
-// @ts-nocheck
-const getTasksSummary = (tasks) => {
+import { Task } from "../types";
+
+const getTasksSummary = (tasks: Task[]) => {
   return tasks.reduce(
-    (acc, task) => {
+    (acc: any, task: Task) => {
       const status = task.status;
       acc[status] = (acc[status] || 0) + 1;
       return acc;

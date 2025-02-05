@@ -1,14 +1,20 @@
-// @ts-nocheck
-
 import DeleteSvg from "../svg/DeleteSvg";
 import EditSvg from "../svg/EditSvg";
+import { Task } from "../types";
+
+interface TaskCardProps {
+  task: Task;
+  setEditTask: React.Dispatch<React.SetStateAction<Task>>;
+  setShowEditTaskModal: React.Dispatch<React.SetStateAction<boolean>>;
+  handleDelete: (id: number) => void;
+}
 
 const TaskCard = ({
   task,
   setEditTask,
   setShowEditTaskModal,
   handleDelete,
-}) => {
+}: TaskCardProps) => {
   return (
     <div className="block max-w-sm px-2 py-4 bg-white shadow-md rounded-xl w-full border border-transparent hover:border-gray-200">
       <div>
