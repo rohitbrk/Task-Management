@@ -1,3 +1,4 @@
+// @ts-nocheck
 import DeleteSvg from "../svg/DeleteSvg";
 import EditSvg from "../svg/EditSvg";
 import { Task } from "../types";

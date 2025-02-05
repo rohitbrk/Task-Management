@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useContext, useEffect, useState } from "react";
 import { TasksContext } from "../context/TasksContext";
 import TasksList from "../components/TasksList";

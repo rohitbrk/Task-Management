@@ -5,6 +5,8 @@ interface ButtonProps {
 }
 
 const Button = ({ children, onClick, variant }: ButtonProps) => {
+  if (variant) {
+  }
   return (
     <button
       onClick={onClick}

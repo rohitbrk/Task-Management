@@ -6,6 +6,7 @@ import EditTaskForm from "../components/EditTaskForm";
 import FilterTasks from "../components/FilterTasks";
 import TasksList from "../components/TasksList";
 import Button from "../components/common/Button";
+import { Task } from "../types";
 
 const AllTasks = () => {
   const { state, dispatch } = useContext(TasksContext);
@@ -16,12 +17,12 @@ const AllTasks = () => {
     status: "pending",
     dueDate: "",
   };
-  const [showAddTaskModal, setShowAddTaskModal] = useState(false);
-  const [showEditTaskModal, setShowEditTaskModal] = useState(false);
-  const [task, setTask] = useState(initialTaskState);
-  const [editTask, setEditTask] = useState({});
-  const [filterBy, setFilterBy] = useState("all");
-  const [tasks, setTasks] = useState(state);
+  const [showAddTaskModal, setShowAddTaskModal] = useState<boolean>(false);
+  const [showEditTaskModal, setShowEditTaskModal] = useState<boolean>(false);
+  const [task, setTask] = useState<Task | null>(initialTaskState);
+  const [editTask, setEditTask] = useState<Task | null>(null);
+  const [filterBy, setFilterBy] = useState<string>("all");
+  const [tasks, setTasks] = useState<Task[] | null>(state);
 
   useEffect(() => {
     setTasks((prev) => state);
