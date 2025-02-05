@@ -5,13 +5,17 @@ interface ButtonProps {
 }
 
 const Button = ({ children, onClick, variant }: ButtonProps) => {
-  if (variant) {
-  }
+  const baseStyles = "";
+
+  const variantStyles: any = {
+    default:
+      "border border-gray-300 cursor-pointer h-10 px-4 py-2 bg-gray-100 flex items-center justify-center rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+    submit:
+      "border border-blue-300 cursor-pointer h-10 px-4 py-2 bg-blue-100 flex items-center justify-center rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  };
+  const buttonClasses = `${baseStyles} ${variantStyles[variant]}`;
   return (
-    <button
-      onClick={onClick}
-      className="border border-gray-300 cursor-pointer h-10 px-6 py-2 bg-gray-100 flex items-center justify-center rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-    >
+    <button onClick={onClick} className={buttonClasses}>
       {children}
     </button>
   );

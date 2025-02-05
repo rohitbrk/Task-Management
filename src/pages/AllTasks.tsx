@@ -67,20 +67,13 @@ const AllTasks = () => {
   return (
     <div>
       <div>
-        <div className="flex justify-around items-center gap-2">
+        <div className="flex justify-around items-center">
           <Button
             onClick={() => setShowAddTaskModal((prev) => !prev)}
-            variant="primary"
+            variant="default"
           >
             Add <RightPointingArrowSvg />
           </Button>
-          <div>
-            <FilterTasks
-              filters={["all", "pending", "inprogress", "completed"]}
-              filterBy={filterBy}
-              handleFilterTasks={handleFilterTasks}
-            />
-          </div>
         </div>
         <div>
           {showAddTaskModal && (

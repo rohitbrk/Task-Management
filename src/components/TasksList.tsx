@@ -17,16 +17,20 @@ const TasksList = ({
   return (
     <div className="flex flex-col items-center gap-2">
       <ul>
-        {tasks.map((item) => (
-          <div key={item.id} className="m-1 p-1">
-            <TaskCard
-              setShowEditTaskModal={setShowEditTaskModal}
-              setEditTask={setEditTask}
-              task={item}
-              handleDelete={handleDelete}
-            />
-          </div>
-        ))}
+        {tasks.length === 0 ? (
+          <div>No Tasks</div>
+        ) : (
+          tasks.map((item) => (
+            <div key={item.id} className="m-1 p-1">
+              <TaskCard
+                setShowEditTaskModal={setShowEditTaskModal}
+                setEditTask={setEditTask}
+                task={item}
+                handleDelete={handleDelete}
+              />
+            </div>
+          ))
+        )}
       </ul>
     </div>
   );
