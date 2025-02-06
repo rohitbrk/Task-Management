@@ -1,11 +1,12 @@
 import { createContext, ReactNode, useReducer } from "react";
 import { sortByDate } from "../utils/sortByDate";
 import { Task } from "../types";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 type TaskAction =
   | { type: "ADD_TASK"; payload: Task }
   | { type: "UPDATE_TASK"; payload: Task }
-  | { type: "DELETE_TASK"; payload: { id: number } }
+  | { type: "DELETE_TASK"; payload: { id: string } }
   | { type: "FILTER_TASKS_"; payload: "pending" | "completed" };
 
 interface TasksContextType {
@@ -17,32 +18,8 @@ interface TasksProviderProps {
   children: ReactNode;
 }
 
-const initialState: Task[] = [
-  {
-    id: 3,
-    title: "item3",
-    description: "description3",
-    status: "pending",
-    dueDate: "26-02-2025",
-  },
-  {
-    id: 1,
-    title: "item1",
-    description: "description1",
-    status: "completed",
-    dueDate: "24-02-2025",
-  },
-  {
-    id: 2,
-    title: "item2",
-    description: "description2",
-    status: "completed",
-    dueDate: "25-02-2025",
-  },
-];
-
 const TasksContext = createContext<TasksContextType>({
-  state: initialState.sort(sortByDate),
+  state: [],
   dispatch: () => {},
 });
 
@@ -75,7 +52,8 @@ const tasksReducer = (state: Task[], action: TaskAction) => {
 };
 
 const TasksProvider: React.FC<TasksProviderProps> = ({ children }) => {
-  const [state, dispatch] = useReducer(tasksReducer, initialState);
+  const [storedValue] = useLocalStorage("storedTasks", []);
+  const [state, dispatch] = useReducer(tasksReducer, storedValue);
   return (
     <TasksContext.Provider value={{ state, dispatch }}>
       {children}

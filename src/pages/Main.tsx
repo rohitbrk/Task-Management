@@ -24,22 +24,22 @@ const Main = () => {
     setFilteredTasks((prev) => filteredTasks_);
   }, [pathname]);
 
+  const initialTaskState = {
+    id: (Math.random() + state.length).toString(),
+    title: "",
+    description: "",
+    status: "pending",
+    dueDate: "",
+  };
+
   useEffect(() => {
-    setStoredValue(filteredTasks);
+    setStoredValue(state);
   }, [state]);
 
   useEffect(() => {
     if (pathname === "/") return setFilteredTasks((prev) => state);
     setFilteredTasks((prev) => filteredTasks);
   }, [state]);
-
-  const initialTaskState = {
-    id: state.length + 1,
-    title: "",
-    description: "",
-    status: "pending",
-    dueDate: "",
-  };
 
   const [showAddTaskModal, setShowAddTaskModal] = useState<boolean>(false);
   const [showEditTaskModal, setShowEditTaskModal] = useState<boolean>(false);

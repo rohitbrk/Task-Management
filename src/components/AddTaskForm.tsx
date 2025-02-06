@@ -65,8 +65,9 @@ const AddTaskForm = ({
           </Button>
           <Button
             onClick={() => {
-              if (task.title === "" || task.description === "")
-                return alert("input cannot be empty");
+              if (task.title === "" || task.dueDate === "") {
+                return alert("Title and Due date cannot be empty");
+              }
               handleAddTask();
             }}
             variant="submit"

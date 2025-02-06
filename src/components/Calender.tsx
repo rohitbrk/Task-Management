@@ -89,13 +89,6 @@ const Calendar = ({ onChange }) => {
           </div>
         ))}
       </div>
-
-      {selectedDate && (
-        <div className="mt-4 text-center text-lg">
-          <p className="font-semibold">Selected Date:</p>
-          <p>{format(selectedDate, "MMMM dd, yyyy")}</p>
-        </div>
-      )}
     </div>
   );
 };

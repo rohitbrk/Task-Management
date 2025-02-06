@@ -85,8 +85,9 @@ const EditTaskForm = ({
           </Button>
           <Button
             onClick={() => {
-              if (task.title === "" || task.description === "")
-                return alert("input cannot be empty");
+              if (editTask.title === "" || editTask.dueDate === "") {
+                return alert("Title and Due date cannot be empty");
+              }
               handleEditTask();
             }}
             variant="submit"

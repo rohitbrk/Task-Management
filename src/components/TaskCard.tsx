@@ -9,7 +9,7 @@ interface TaskCardProps {
   task: Task;
   setEditTask: React.Dispatch<React.SetStateAction<Task>>;
   setShowEditTaskModal: React.Dispatch<React.SetStateAction<boolean>>;
-  handleDelete: (id: number) => void;
+  handleDelete: (id: string) => void;
 }
 
 const TaskCard = ({

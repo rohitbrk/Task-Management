@@ -5,7 +5,7 @@ interface TasksListProps {
   tasks: Task[];
   setShowEditTaskModal: React.Dispatch<React.SetStateAction<boolean>>;
   setEditTask: React.Dispatch<React.SetStateAction<Task>>;
-  handleDelete: (id: number) => void;
+  handleDelete: (id: string) => void;
 }
 
 const TasksList = ({
