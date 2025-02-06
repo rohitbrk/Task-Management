@@ -3,6 +3,7 @@ import React from "react";
 import Button from "./common/Button";
 import Input from "./common/Input";
 import { Task } from "../types";
+import Calendar from "./Calender";
 
 interface EditTaskFormProps {
   editTask: Task;
@@ -49,7 +50,7 @@ const EditTaskForm = ({
               }
             />
             <br />
-            <Input
+            {/* <Input
               value={editTask.dueDate}
               onChange={(e) =>
                 setEditTask((prev: any) => ({
@@ -57,7 +58,11 @@ const EditTaskForm = ({
                   dueDate: e.target.value,
                 }))
               }
-            />
+            /> */}
+            <div className="flex flex-col items-center">
+              <p>Due Date</p>
+              <Calendar onChange={setEditTask} />
+            </div>
             <div className="flex justify-end">
               <label>
                 status
