@@ -18,7 +18,6 @@ const AddTaskForm = ({
   setTask,
   handleAddTask,
 }: AddTaskFormProps) => {
-  console.log(task);
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
@@ -50,13 +49,6 @@ const AddTaskForm = ({
               }
             />
             <br />
-            {/* <Input
-              value={task.dueDate}
-              placeholder="Enter due date"
-              onChange={(e) =>
-                setTask((prev) => ({ ...prev, dueDate: e.target.value }))
-              }
-            /> */}
             <div className="flex flex-col items-center">
               <p>Due Date</p>
               <Calendar onChange={setTask} />
@@ -71,7 +63,14 @@ const AddTaskForm = ({
           >
             close
           </Button>
-          <Button onClick={handleAddTask} variant="submit">
+          <Button
+            onClick={() => {
+              if (task.title === "" || task.description === "")
+                return alert("input cannot be empty");
+              handleAddTask();
+            }}
+            variant="submit"
+          >
             submit
           </Button>
         </div>

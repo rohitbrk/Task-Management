@@ -8,11 +8,13 @@ import RightPointingArrowSvg from "../svg/RightPointingArrowSvg";
 import { Task } from "../types";
 import { useLocation } from "react-router";
 import { TasksContext } from "../context/TasksContext";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const Main = () => {
   const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
   const { pathname } = useLocation();
   const { state, dispatch } = useContext(TasksContext);
+  const [storedValue, setStoredValue] = useLocalStorage("storedTasks", []);
 
   useEffect(() => {
     if (pathname === "/") return setFilteredTasks((prev) => state);
@@ -21,6 +23,10 @@ const Main = () => {
     );
     setFilteredTasks((prev) => filteredTasks_);
   }, [pathname]);
+
+  useEffect(() => {
+    setStoredValue(filteredTasks);
+  }, [state]);
 
   useEffect(() => {
     if (pathname === "/") return setFilteredTasks((prev) => state);

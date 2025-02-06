@@ -38,7 +38,6 @@ const Calendar = ({ onChange }) => {
 
   const handleDateSelect = (day) => {
     setSelectedDate(day);
-    console.log("Selected date:", format(day, "dd-MM-yyyy"));
   };
 
   return (

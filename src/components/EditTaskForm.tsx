@@ -50,15 +50,6 @@ const EditTaskForm = ({
               }
             />
             <br />
-            {/* <Input
-              value={editTask.dueDate}
-              onChange={(e) =>
-                setEditTask((prev: any) => ({
-                  ...prev,
-                  dueDate: e.target.value,
-                }))
-              }
-            /> */}
             <div className="flex flex-col items-center">
               <p>Due Date</p>
               <Calendar onChange={setEditTask} />
@@ -92,7 +83,14 @@ const EditTaskForm = ({
           >
             close
           </Button>
-          <Button onClick={handleEditTask} variant="submit">
+          <Button
+            onClick={() => {
+              if (task.title === "" || task.description === "")
+                return alert("input cannot be empty");
+              handleEditTask();
+            }}
+            variant="submit"
+          >
             submit
           </Button>
         </div>
