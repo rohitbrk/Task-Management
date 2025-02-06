@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 interface InputProps {
   value?: string;
   placeholder?: string;
